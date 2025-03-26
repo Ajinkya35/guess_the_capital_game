@@ -18,11 +18,22 @@
   <script src="firebase-config.js"></script>
 </head>
 <body>
+  <script>
+    document.getElementById("logoutBtn").addEventListener("click", function() {
+    // Perform logout operations here, such as clearing session storage or cookies
+    // For example, to clear session storage:
+    sessionStorage.clear();
+
+    // Redirect to the login page
+    window.location.href = "login.html";
+});
+
+  </script>
   <!-- Navbar with Logout -->
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Guess the Capital</a>
-      <button id="logoutBtn" class="btn btn-outline-danger">Logout</button>
+      <button id="logoutBtn" class="btn btn-outline-danger"  onclick="">Logout</button>
     </div>
   </nav>
 
