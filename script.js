@@ -19,8 +19,9 @@ $(document).ready(function () {
         $("#nxt-btn").removeAttr("disabled");
         $("#nxt-btn").text("Next");
   
+    // Store the result in Firebase
         // Optional: Store correct answer in Firebase Database.
-        /*
+      
         var user = firebase.auth().currentUser;
         if (user) {
           firebase.database().ref('scores/' + user.uid).push({
@@ -29,7 +30,7 @@ $(document).ready(function () {
             timestamp: Date.now()
           });
         }
-        */
+        
       } else {
         $(this).addClass("wrong-ans");
         $(".btn").attr('disabled', 'true');
@@ -39,7 +40,7 @@ $(document).ready(function () {
         $("#nxt-btn").text("Play Again");
   
         // Optional: Store wrong answer in Firebase Database.
-        /*
+      
         var user = firebase.auth().currentUser;
         if (user) {
           firebase.database().ref('scores/' + user.uid).push({
@@ -48,7 +49,7 @@ $(document).ready(function () {
             timestamp: Date.now()
           });
         }
-        */
+      
       }
     });
   
@@ -115,4 +116,3 @@ $(document).ready(function () {
       console.log(err);
     }
   }
-  
