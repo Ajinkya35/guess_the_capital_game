@@ -43,8 +43,7 @@
     </div>
   </div>
 
-  <script>
-   document.getElementById('registerForm').addEventListener('submit', function (e) {
+  <script>document.getElementById('registerForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     var name = document.getElementById('registerName').value;
@@ -66,6 +65,7 @@
             window.location.href = "login.html";
         })
         .catch((error) => {
+            console.error("Registration Error:", error);
             alert("Error: " + error.message);
         });
 });
