@@ -19,13 +19,11 @@
 </head>
 <body>
   <script>
-    document.getElementById("logoutBtn").addEventListener("click", function() {
-    // Perform logout operations here, such as clearing session storage or cookies
-    // For example, to clear session storage:
+document.getElementById("logoutBtn").addEventListener("click", function() {
+    // Clear session storage or perform other logout operations
     sessionStorage.clear();
-
     // Redirect to the login page
-    window.location.href = "login.html";
+    window.location.href = "/login.html";
 });
 
   </script>
