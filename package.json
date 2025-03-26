@@ -1,0 +1,13 @@
+{
+    "name": "guess_the_capital_game",
+    "version": "1.0.0",
+    "description": "A game to guess the capital of a country with Firebase authentication",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2"
+    }
+  }
+  
