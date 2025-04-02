@@ -14,14 +14,15 @@
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script> <!-- ✅ ADDED -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script> <!-- ✅ Database Added -->
 
   <!-- Firebase Configuration -->
   <script src="firebase-config.js"></script>
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100">
-  <div class="container shadow-lg p-5 rounded bg-light">
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="container shadow-lg p-5 rounded bg-white" style="max-width: 400px;">
     <h2 class="text-center mb-4">Register</h2>
+    
     <form id="registerForm">
       <div class="mb-3">
         <label for="registerName" class="form-label">Full Name</label>
@@ -40,8 +41,17 @@
         <input type="password" class="form-control" id="registerPassword" required>
       </div>
       <button type="submit" class="btn btn-dark w-100">Register</button>
-      <p class="mt-3 text-center">Already registered? <a href="login.html">Login here</a></p>
     </form>
+
+    <hr class="my-4">
+
+    <!-- Google Sign-Up Button -->
+    <button id="googleSignUp" class="btn btn-danger w-100">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" style="width: 20px; margin-right: 10px;">
+      Sign Up with Google
+    </button>
+
+    <p class="mt-3 text-center">Already registered? <a href="login.html">Login here</a></p>
   </div>
 
   <script>
@@ -56,18 +66,40 @@
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           var user = userCredential.user;
-          return firebase.database().ref('users/' + user.uid).set({  // ✅ FIXED database() issue
+          return firebase.database().ref('users/' + user.uid).set({
             name: name,
             age: age,
             email: email
           });
         })
         .then(() => {
-          alert("Registration successful. Please log in.");
+          alert("Registration successful. Redirecting to login...");
           window.location.href = "login.html";
         })
         .catch((error) => {
           console.error("Registration Error:", error);
+          alert("Error: " + error.message);
+        });
+    });
+
+    // Google Sign-Up
+    document.getElementById('googleSignUp').addEventListener('click', function () {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+          var user = result.user;
+          return firebase.database().ref('users/' + user.uid).set({
+            name: user.displayName,
+            email: user.email,
+            age: "N/A"  // Google doesn't provide age, you can ask later
+          });
+        })
+        .then(() => {
+          alert("Sign-Up with Google successful. Redirecting...");
+          window.location.href = "dashboard.html"; // Change to your target page
+        })
+        .catch((error) => {
+          console.error("Google Sign-Up Error:", error);
           alert("Error: " + error.message);
         });
     });
